@@ -3,23 +3,23 @@ spring:
     name: jwt-security-practice
 
   datasource:
-    url: jdbc:mysql://localhost:3306/jwt_security_practice?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: root
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: ${DDL_AUTO:update}
+    show-sql: ${SHOW_SQL:false}
     properties:
       hibernate:
-        format_sql: true
+        format_sql: ${FORMAT_SQL:false}
 
 app:
   jwt:
-    secret: VGhpc0lzQVN1ZmZpY2llbnRseUxvbmdEZW1vU2VjcmV0S2V5Rm9ySFMyNTYxMjM0NTY3ODkw
-    access-expiration-ms: 600000
-    refresh-expiration-ms: 1200000
+    secret: ${JWT_SECRET}
+    access-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:600000}
+    refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:1200000}
 
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
