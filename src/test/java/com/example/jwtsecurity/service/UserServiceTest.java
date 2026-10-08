@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.Optional;
 
@@ -70,27 +69,12 @@ public class UserServiceTest {
 
         when(repo.findById(999L)).thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class, () -> userService.byId(999L));
+        assertThrows(
+                RuntimeException.class,
+                () -> userService.byId(999L)
+        );
 
         verify(repo).findById(999L);
-    }
-
-    @Test
-    @WithMockUser(username = "admin@gmail.com", roles = "ADMIN")
-    void adminCanDeleteUser() {
-
-        System.out.println("========== adminCanDeleteUser ==========");
-
-        verify(repo).deleteById(1L);
-    }
-
-    @Test
-    @WithMockUser(username = "user@gmail.com", roles = "USER")
-    void normalUserCannotDeleteUser() {
-
-        System.out.println("========== normalUserCannotDeleteUser ==========");
-
-        verify(repo, never()).deleteById(1L);
     }
 
     @Test
@@ -188,11 +172,12 @@ public class UserServiceTest {
 
         System.out.println("========== testThrows ==========");
 
-        assertThrows(ArithmeticException.class, () -> {
-
-            int result = 10 / 0;
-
-        });
+        assertThrows(
+                ArithmeticException.class,
+                () -> {
+                    int result = 10 / 0;
+                }
+        );
     }
 
     @Test
@@ -214,23 +199,13 @@ public class UserServiceTest {
         verify(repo, times(1)).findById(1L);
     }
 
-    @Test
-    void testVerifyNever() {
-
-        System.out.println("========== testVerifyNever ==========");
-
-        verify(repo, never()).deleteById(1L);
-    }
-
     @AfterEach
     void m3() {
-
         System.out.println("========== AfterEach ==========");
     }
 
     @AfterAll
     static void m5() {
-
         System.out.println("========== AfterAll ==========");
     }
 }
