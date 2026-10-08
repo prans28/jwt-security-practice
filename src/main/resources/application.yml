@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: jwt-security-practice
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    show-sql: ${SHOW_SQL:false}
+    properties:
+      hibernate:
+        format_sql: ${FORMAT_SQL:false}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    access-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:600000}
+    refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:1200000}
+
+server:
+  port: ${SERVER_PORT:8080}
